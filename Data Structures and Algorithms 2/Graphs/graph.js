@@ -43,7 +43,7 @@ class Graph{
     DFS(v){
         const result = [];
         const visited = {};
-        const adjacencyList = this.adjacencyList;//this.adjacencyList will change in below function hence store it in a variable
+        const adjacencyList = this.adjacencyList;//this.adjacencyList will change in below function hence store it in a variable(will not be accessible in below function)
 
         function DFSTraverse(vertex){
             //If the vertex not present return null
@@ -51,7 +51,7 @@ class Graph{
             //Add the vertex to result list
             result.push(vertex);
             //mark vertex as visited
-            visited[vertex] = true;
+            visited[vertex] = true;     
             //Loop each neighbor of the vertex
             for(let v1 of adjacencyList[vertex]){
                 //If neighbor is not already visited
@@ -64,6 +64,32 @@ class Graph{
             // console.log(result);
         }
         DFSTraverse(v);
+        return result;
+    }
+
+    BFS(start){
+        let queue = [start];//Use queue for storing and removing verices,add start to queue
+        let result = [];//Final result
+        let visited = {};//Visited tracking object
+        let currentVertex;
+        visited[start] = true;//since we start with passed vertex mark it as visited
+
+        while(queue.length){
+            //remove first item from queue
+            currentVertex = queue.unshift();
+            //push the current into the result array
+            result.push(currentVertex);
+
+            //Loop through all the connection vertexes of current vertex
+            this.adjacencyList[currentVertex].forEach(neighbor => {
+                //If current neighbor is not visited already
+                if(!visited[neighbor]){
+                    //mark is visited and push it in to the queue
+                    visited[neighbor] = true;
+                    queue.push(neighbor);
+                }
+            });
+        }
         return result;
     }
 
