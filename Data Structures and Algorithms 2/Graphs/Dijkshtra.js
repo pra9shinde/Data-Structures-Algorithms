@@ -40,7 +40,7 @@ class WeightedGraph{
         let smallest;
         let path = []; //to return at the end
 
-        //Build up Distances
+        //Build up Distances and previous obj
             //Loop through adjacencylist add each vertex to distances
             //Add in distances and Keep everyones values as infinity except start node because we dont know the distance between them
             //Also add the vertex to priority queue to always get smallest from the distance object
